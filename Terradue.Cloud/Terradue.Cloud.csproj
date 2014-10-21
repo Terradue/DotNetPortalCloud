@@ -59,6 +59,9 @@
     <Reference Include="Terradue.Hadoop">
       <HintPath>..\packages\Terradue.Hadoop.1.3.2\lib\net40\Terradue.Hadoop.dll</HintPath>
     </Reference>
+    <Reference Include="Terradue.ServiceModel.Syndication">
+      <HintPath>..\packages\Terradue.ServiceModel.Syndication.1.0.0.0\lib\net40\Terradue.ServiceModel.Syndication.dll</HintPath>
+    </Reference>
     <Reference Include="Terradue.OpenSearch">
       <HintPath>..\packages\Terradue.OpenSearch.1.7.0.1\lib\net40\Terradue.OpenSearch.dll</HintPath>
     </Reference>
