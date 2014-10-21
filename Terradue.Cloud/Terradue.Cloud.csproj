@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BuildDir>$(MSBuildProjectDirectory)</BuildDir>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A359021F-906E-4B1C-92CC-FD9595400AFA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Terradue.Cloud</RootNamespace>
+    <AssemblyName>Terradue.Cloud</AssemblyName>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
+    <ReleaseVersion>1.2</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Net" />
+    <Reference Include="Mono.Http" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="System.Core" />
+    <Reference Include="Terradue.Util">
+      <HintPath>..\packages\Terradue.Util.1.4.0\lib\net40\Terradue.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.ServiceModel.Syndication">
+      <HintPath>..\packages\Terradue.ServiceModel.Syndication.1.0.0.0\lib\net40\Terradue.ServiceModel.Syndication.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.OpenSearch">
+      <HintPath>..\packages\Terradue.OpenSearch.1.7.0.1\lib\net40\Terradue.OpenSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.1.0.7.30073\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.OpenNebula">
+      <HintPath>..\packages\Terradue.OpenNebula.1.0.0-beta\lib\net40\Terradue.OpenNebula.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.ServiceModel.Ogc.OwsContext">
+      <HintPath>..\packages\Terradue.ServiceModel.Ogc.OwsContext.1.0.0\lib\net40\Terradue.ServiceModel.Ogc.OwsContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.Portal">
+      <HintPath>..\packages\Terradue.Portal.2.5.5\lib\net40\Terradue.Portal.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.Portal.AdminTool">
+      <HintPath>..\packages\Terradue.Portal.2.5.5\lib\net40\Terradue.Portal.AdminTool.exe</HintPath>
+    </Reference>
+    <Reference Include="Terradue.Portal.Agent">
+      <HintPath>..\packages\Terradue.Portal.2.5.5\lib\net40\Terradue.Portal.Agent.exe</HintPath>
+    </Reference>
+    <Reference Include="Terradue.Certification">
+      <HintPath>..\packages\Terradue.Certification.1.4.1\lib\net40\Terradue.Certification.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Terradue\Cloud\CloudAppliance.cs" />
+    <Compile Include="Terradue\Cloud\CloudComputingResource.cs" />
+    <Compile Include="Terradue\Cloud\CloudProvider.cs" />
+    <Compile Include="Terradue\Cloud\OcciCloudAppliance.cs" />
+    <Compile Include="Terradue\Cloud\OcciCloudProvider.cs" />
+    <Compile Include="Terradue\Cloud\OcciInstanceType.cs" />
+    <Compile Include="Terradue\Cloud\OcciNetwork.cs" />
+    <Compile Include="Terradue\Cloud\OcciStorage.cs" />
+    <Compile Include="Terradue\Cloud\OozieComputingResource.cs" />
+    <Compile Include="Terradue\Cloud\ProcessorArchitecture.cs" />
+    <Compile Include="Terradue\Cloud\VirtualDisk.cs" />
+    <Compile Include="Terradue\Cloud\VirtualMachineTemplate.cs" />
+    <Compile Include="Terradue\Cloud\VirtualNetwork.cs" />
+    <Compile Include="Terradue\Cloud\VirtualResource.cs" />
+    <Compile Include="Terradue\Cloud\CloudComputingService.cs" />
+    <Compile Include="Terradue\Cloud\CloudComputingDriveInfo.cs" />
+    <Compile Include="Terradue\Cloud\HDFSCloudComputingDriveInfo.cs" />
+    <Compile Include="Terradue\Cloud\MachineDiagnostics.cs" />
+    <Compile Include="Terradue\Cloud\ProcessCloudComputingService.cs" />
+    <Compile Include="Terradue\Cloud\HadoopMapReduceCloudComputingService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Terradue\Cloud\OneCloudProvider.cs" />
+    <Compile Include="Terradue\Cloud\OneCloudAppliance.cs" />
+    <Compile Include="Terradue\Cloud\OneImage.cs" />
+    <Compile Include="Terradue\Cloud\OneNetwork.cs" />
+    <Compile Include="Terradue\Cloud\OneVMTemplate.cs" />
+    <Compile Include="Terradue\Cloud\LocalCloudAppliance.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Terradue.Cloud.csproj" />
+  </ItemGroup>
+</Project>
