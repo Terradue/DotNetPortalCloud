@@ -205,7 +205,7 @@ namespace Terradue.Cloud {
 
             //delegate client user
             User owner = User.FromId(context, context.OwnerId);
-            this.StartDelegate(owner.Username);
+            this.StartDelegate(owner.Email);
             appliance.Create();
             this.EndDelegate();
 
