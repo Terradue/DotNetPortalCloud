@@ -5,6 +5,10 @@ namespace Terradue.Cloud {
     [EntityTable("usr_cloud", EntityTableConfiguration.Custom, IsRequired = false)]
     public class CloudUser : User {
 
+        [EntityDataField("id_usr")]
+        public int UserId { get; set; }
+
+
         [EntityDataField("id_provider")]
         public int ProviderId { get; set; }
 
@@ -15,7 +19,7 @@ namespace Terradue.Cloud {
 
         public override string AlternativeIdentifyingCondition{
             get { 
-                if (Id != 0 && ProviderId != 0) return String.Format("t.id={0} AND t.id_provider={1}",Id,ProviderId); 
+                if (UserId != 0 && ProviderId != 0) return String.Format("t.id={0} AND t.id_provider={1}",Id,ProviderId); 
                 return null;
             }
         }
@@ -28,7 +32,7 @@ namespace Terradue.Cloud {
 
         public static CloudUser FromIdAndProvider(IfyContext context, int usrId, int providerId){
             CloudUser result = new CloudUser(context);
-            result.Id = usrId;
+            result.UserId = usrId;
             result.ProviderId = providerId;
             result.Load();
             return result;
