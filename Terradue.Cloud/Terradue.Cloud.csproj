@@ -95,6 +95,7 @@
     <Compile Include="Terradue\Cloud\OneNetwork.cs" />
     <Compile Include="Terradue\Cloud\OneVMTemplate.cs" />
     <Compile Include="Terradue\Cloud\LocalCloudAppliance.cs" />
+    <Compile Include="Terradue\Cloud\CloudUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
