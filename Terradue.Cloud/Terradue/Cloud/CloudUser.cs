@@ -13,6 +13,15 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
+        public override string AlternativeIdentifyingCondition{
+            get { 
+                if (Id != 0 && ProviderId != 0) return String.Format("t.id={0} AND t.id_provider={1}",Id,ProviderId); 
+                return null;
+            }
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------
+
         public CloudUser(IfyContext context) : base(context) {}
 
         //---------------------------------------------------------------------------------------------------------------------
