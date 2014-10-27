@@ -2,7 +2,7 @@
 using Terradue.Portal;
 
 namespace Terradue.Cloud {
-    [EntityTable("usr_cloud", EntityTableConfiguration.Custom, IdField = "id_usr", IsRequired = false)]
+    [EntityTable("usr_cloud", EntityTableConfiguration.Custom, IsRequired = false)]
     public class CloudUser : User {
 
         [EntityDataField("id_provider")]
