@@ -17,7 +17,7 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        public CloudUser FromIdAndProvider(IfyContext context, int usrId, int providerId){
+        public static CloudUser FromIdAndProvider(IfyContext context, int usrId, int providerId){
             CloudUser result = new CloudUser(context);
             result.Id = usrId;
             result.ProviderId = providerId;
