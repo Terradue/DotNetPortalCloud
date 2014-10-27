@@ -5,7 +5,7 @@ namespace Terradue.Cloud {
     [EntityTable("usr_cloud", EntityTableConfiguration.Custom, IsRequired = false)]
     public class CloudUser : User {
 
-        [EntityDataField("id_usr")]
+        [EntityDataField("id")]
         public int UserId { get; set; }
 
 
@@ -19,7 +19,7 @@ namespace Terradue.Cloud {
 
         public override string AlternativeIdentifyingCondition{
             get { 
-                if (UserId != 0 && ProviderId != 0) return String.Format("t.id={0} AND t.id_provider={1}",Id,ProviderId); 
+                if (UserId != 0 && ProviderId != 0) return String.Format("t.id={0} AND t.id_provider={1}",UserId,ProviderId); 
                 return null;
             }
         }

@@ -129,10 +129,10 @@ CREATE TABLE ooziecr (
 /*****************************************************************************/
 
 CREATE TABLE usr_cloud (
-    id_usr int unsigned NOT NULL COMMENT 'FK: User',
+    id int unsigned NOT NULL COMMENT 'FK: User',
     id_provider int unsigned NOT NULL COMMENT 'FK: Provider',
     username varchar(50) NOT NULL COMMENT 'Username for cloud authentication',
-    CONSTRAINT pk_usr_cloud PRIMARY KEY (id_usr, id_provider),
-    CONSTRAINT fk_usr_cloud_usr FOREIGN KEY (id_usr) REFERENCES usr(id) ON DELETE CASCADE,
+    CONSTRAINT pk_usr_cloud PRIMARY KEY (id, id_provider),
+    CONSTRAINT fk_usr_cloud_usr FOREIGN KEY (id) REFERENCES usr(id) ON DELETE CASCADE,
     CONSTRAINT fk_usr_cloud_provider FOREIGN KEY (id_provider) REFERENCES cloudprov(id) ON DELETE CASCADE
 ) Engine=InnoDB COMMENT 'user cloud information';
