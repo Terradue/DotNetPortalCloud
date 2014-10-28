@@ -136,3 +136,9 @@ CREATE TABLE usr_cloud (
     CONSTRAINT fk_usr_cloud_usr FOREIGN KEY (id) REFERENCES usr(id) ON DELETE CASCADE,
     CONSTRAINT fk_usr_cloud_provider FOREIGN KEY (id_provider) REFERENCES cloudprov(id) ON DELETE CASCADE
 ) Engine=InnoDB COMMENT 'user cloud information';
+
+/*****************************************************************************/
+
+CALL add_type($ID$, 'Terradue.Cloud.CloudUser, Terradue.Cloud', 'Terradue.Portal.User, Terradue.Portal', 'Cloud user information', 'Cloud user information', NULL);
+
+/*****************************************************************************/
