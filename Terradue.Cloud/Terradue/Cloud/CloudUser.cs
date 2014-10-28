@@ -13,7 +13,7 @@ namespace Terradue.Cloud {
         public int ProviderId { get; set; }
 
         [EntityDataField("username")]
-        public string CloudUsername { get; protected set; }
+        public string CloudUsername { get; set; }
 
         //---------------------------------------------------------------------------------------------------------------------
 
