@@ -180,7 +180,7 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        public override CloudAppliance CreateInstance(string name, string templateName, string networkName, string additionalTemplate) {
+        public override CloudAppliance CreateInstance(string name, string templateName, string networkName, List<KeyValuePair<string,string>> additionalTemplate) {
             return CreateInstance(name, templateName, networkName);
         }
 

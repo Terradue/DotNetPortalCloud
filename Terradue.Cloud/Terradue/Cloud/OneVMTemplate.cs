@@ -13,6 +13,7 @@ using Terradue.OpenNebula;
 //-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 
 
 
@@ -33,6 +34,10 @@ namespace Terradue.Cloud {
 	[Serializable]
 	[DataContract]
     public class OneVMTemplate : VirtualMachineTemplate {
+
+        //---------------------------------------------------------------------------------------------------------------------
+
+        public VMTEMPLATE OneTemplate { get; protected set; }
 
         //---------------------------------------------------------------------------------------------------------------------
         
@@ -66,8 +71,24 @@ namespace Terradue.Cloud {
             this.RemoteId = template.ID;
             this.Name = template.NAME;
             this.Provider = provider;
+            this.OneTemplate = template;
         }
 
+        //---------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Merges the content of the additional info with the existing template.
+        /// </summary>
+        /// <returns>The additional content.</returns>
+        /// <param name="addContent">Add content.</param>
+        public string GetTemplateXml(string key){
+            if (this.OneTemplate == null || this.OneTemplate.TEMPLATE == null) return null;
+            //we add the new content
+            XmlNode[] user_template = (XmlNode[])this.OneTemplate.TEMPLATE;
+            foreach (XmlNode nodeUT in user_template) {
+                if (nodeUT.LocalName == key) return nodeUT.InnerXml;
+            }
+            return null;
+        }
     }
 
 

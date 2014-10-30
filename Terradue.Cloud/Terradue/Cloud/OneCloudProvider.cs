@@ -197,9 +197,25 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        public override CloudAppliance CreateInstance(string name, string templateName, string networkName, string additionalTemplate) {
+        /// <summary>
+        /// Creates the instance.
+        /// </summary>
+        /// <returns>The instance.</returns>
+        /// <param name="name">Name.</param>
+        /// <param name="templateName">Template name.</param>
+        /// <param name="networkName">Network name.</param>
+        /// <param name="additionalTemplate">Additional template, value should be XML</param>
+        public override CloudAppliance CreateInstance(string name, string templateName, string networkName, List<KeyValuePair<string,string>> additionalTemplate) {
             OneVMTemplate template = (OneVMTemplate)this.GetTemplate(templateName);
-            template.AdditionalContent = additionalTemplate;
+            string templatexml = "";
+            foreach (KeyValuePair<string,string> kvp in additionalTemplate) {
+                string xml = template.GetTemplateXml(kvp.Key);
+                if (xml != null) {
+                    templatexml += "<" + kvp.Key + ">" + xml + kvp.Value + "</" + kvp.Key + ">";
+                }
+            }
+            if (templatexml == "") template.AdditionalContent = "";
+            else template.AdditionalContent = "<TEMPLATE>" + templatexml + "</TEMPLATE>";
             OneImage[] disks = new OneImage[0];
             OneNetwork network = (networkName != null && networkName != "" ? (OneNetwork)this.GetNetwork(networkName) : null);
             return CreateInstance(name, template, disks, network);
