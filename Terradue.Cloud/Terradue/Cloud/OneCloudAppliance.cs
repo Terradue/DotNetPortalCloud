@@ -82,6 +82,10 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
         [IgnoreDataMember]
+        public string AdditionalTemplate { get; set; }
+
+        //---------------------------------------------------------------------------------------------------------------------
+        [IgnoreDataMember]
         private OneCloudProvider xmlrpcprovider { get; set;}
         [IgnoreDataMember]
         public OneCloudProvider XmlRpcProvider { 
@@ -205,7 +209,8 @@ namespace Terradue.Cloud {
         
         /// <summary>Creates the instance on the cloud provider and stores the record in the local database.</summary>
         public override bool Create() {
-            this.RemoteId = this.XmlRpcProvider.XmlRpc.TemplateInstanciateVM(Int32.Parse(this.VMTemplate.RemoteId), this.Name, false, "").ToString();
+            if (this.AdditionalTemplate == null) this.AdditionalTemplate = "";
+            this.RemoteId = this.XmlRpcProvider.XmlRpc.TemplateInstanciateVM(Int32.Parse(this.VMTemplate.RemoteId), this.Name, false, this.AdditionalTemplate).ToString();
             Store();
             return true;
         }
