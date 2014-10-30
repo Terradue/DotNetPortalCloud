@@ -191,7 +191,7 @@ namespace Terradue.Cloud {
         public override CloudAppliance CreateInstance(string name, string templateName, string networkName) {
             OneVMTemplate template = (OneVMTemplate)this.GetTemplate(templateName);
             OneImage[] disks = new OneImage[0];
-            OneNetwork network = (networkName != null ? (OneNetwork)this.GetNetwork(networkName) : null);
+            OneNetwork network = (networkName != null && networkName != "" ? (OneNetwork)this.GetNetwork(networkName) : null);
             return CreateInstance(name, template, disks, network);
         }
 
@@ -201,7 +201,7 @@ namespace Terradue.Cloud {
             OneVMTemplate template = (OneVMTemplate)this.GetTemplate(templateName);
             template.AdditionalContent = additionalTemplate;
             OneImage[] disks = new OneImage[0];
-            OneNetwork network = (networkName != null ? (OneNetwork)this.GetNetwork(networkName) : null);
+            OneNetwork network = (networkName != null && networkName != "" ? (OneNetwork)this.GetNetwork(networkName) : null);
             return CreateInstance(name, template, disks, network);
         }
 
