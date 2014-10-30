@@ -179,6 +179,12 @@ namespace Terradue.Cloud {
         }
 
         //---------------------------------------------------------------------------------------------------------------------
+
+        public override CloudAppliance CreateInstance(string name, string templateName, string networkName, string additionalTemplate) {
+            return CreateInstance(name, templateName, networkName);
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------
         
         public override CloudAppliance CreateInstance(string name, VirtualMachineTemplate template, VirtualDisk[] disks, VirtualNetwork network) {
             CloudAppliance appliance = OcciCloudAppliance.FromResources(context, template as OcciInstanceType, disks as OcciStorage[], network as OcciNetwork);

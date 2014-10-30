@@ -33,7 +33,7 @@ namespace Terradue.Cloud {
 	[Serializable]
 	[DataContract]
     public class OneVMTemplate : VirtualMachineTemplate {
-        
+
         //---------------------------------------------------------------------------------------------------------------------
         
         public OneVMTemplate(IfyContext context) : base(context) {}

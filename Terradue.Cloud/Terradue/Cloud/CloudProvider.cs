@@ -116,6 +116,10 @@ namespace Terradue.Cloud {
         public abstract CloudAppliance CreateInstance (string name, string templateName, string networkName);
 
         //---------------------------------------------------------------------------------------------------------------------
+
+        public abstract CloudAppliance CreateInstance (string name, string templateName, string networkName, string additionalTemplate);
+
+        //---------------------------------------------------------------------------------------------------------------------
         
         public abstract CloudAppliance CreateInstance(string caption, VirtualMachineTemplate template, VirtualDisk[] disks, VirtualNetwork network);
         
@@ -208,6 +212,12 @@ namespace Terradue.Cloud {
         //---------------------------------------------------------------------------------------------------------------------
         
         public override CloudAppliance CreateInstance(string caption, string templateName, string networkName) {
+            return null;
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------
+
+        public override CloudAppliance CreateInstance(string caption, string templateName, string networkName, string additionalTemplate) {
             return null;
         }
 

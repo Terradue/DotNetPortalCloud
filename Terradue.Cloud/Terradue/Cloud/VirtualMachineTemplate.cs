@@ -32,6 +32,14 @@ namespace Terradue.Cloud {
 	[Serializable]
 	[DataContract]
     public class VirtualMachineTemplate : VirtualResource {
+
+        //---------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Gets or sets the additional content to be add to the template during the instanciation
+        /// </summary>
+        /// <value>The additional content of the template.</value>
+        public string AdditionalContent { get; set; }
         
         //---------------------------------------------------------------------------------------------------------------------
         

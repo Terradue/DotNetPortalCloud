@@ -196,12 +196,23 @@ namespace Terradue.Cloud {
         }
 
         //---------------------------------------------------------------------------------------------------------------------
+
+        public override CloudAppliance CreateInstance(string name, string templateName, string networkName, string additionalTemplate) {
+            OneVMTemplate template = (OneVMTemplate)this.GetTemplate(templateName);
+            template.AdditionalContent = additionalTemplate;
+            OneImage[] disks = new OneImage[0];
+            OneNetwork network = (networkName != null ? (OneNetwork)this.GetNetwork(networkName) : null);
+            return CreateInstance(name, template, disks, network);
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------
         
         public override CloudAppliance CreateInstance(string name, VirtualMachineTemplate template, VirtualDisk[] disks, VirtualNetwork network) {
 
             OneCloudAppliance appliance = OneCloudAppliance.FromResources(context, template as OneVMTemplate, disks as OneImage[], network as OneNetwork);
             appliance.XmlRpcProvider = this;
             appliance.Name = name;
+            appliance.AdditionalTemplate = template.AdditionalContent;
 
             //delegate client user
             CloudUser owner = CloudUser.FromIdAndProvider(context, context.OwnerId, this.Id);
