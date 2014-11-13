@@ -112,10 +112,26 @@ namespace Terradue.Cloud {
             get{ 
                 if (hostname == null || hostname == "localhost") {
                     XmlNode[] template = (XmlNode[])Vm.TEMPLATE;
+                    bool aws = false;
+
                     foreach (XmlNode nodeT in template) {
-                        if (nodeT.Name == "NIC") {
-                            hostname = nodeT["IP"].InnerText;
+                        if (nodeT.Name == "CONTEXT") {
+                            aws = (nodeT["PUBLIC"].InnerText == "aws-ec2");
                             break;
+                        }
+                    }
+
+                    foreach (XmlNode nodeT in template) {
+                        if (aws) {
+                            if (nodeT.Name == "EXT_IP") {
+                                hostname = nodeT.InnerText;
+                                break;
+                            }
+                        } else {
+                            if (nodeT.Name == "NIC") {
+                                hostname = nodeT["IP"].InnerText;
+                                break;
+                            }
                         }
                     }
                     if (hostname == null) hostname = "localhost";
