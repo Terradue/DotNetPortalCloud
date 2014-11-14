@@ -35,7 +35,7 @@ namespace Terradue.Test {
             }
 
             Site site;
-            CoreModule core = new CoreModule(this, "core");
+            CoreModule core = new CoreModule(this, "../core");
             core.Install();
 
             CloseConnection();
