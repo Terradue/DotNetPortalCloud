@@ -116,7 +116,12 @@ namespace Terradue.Cloud {
 
                     foreach (XmlNode nodeT in template) {
                         if (nodeT.Name == "CONTEXT") {
-                            aws = (nodeT["PUBLIC"].InnerText == "aws-ec2");
+                            try{
+                                aws = (nodeT["PUBLIC"].InnerText == "aws-ec2");
+                            }catch(Exception e){
+                                //no PUBLIC node
+                                aws = false;
+                            }
                             break;
                         }
                     }
