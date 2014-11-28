@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terradue.Cloud", "Terradue.Cloud\Terradue.Cloud.csproj", "{A359021F-906E-4B1C-92CC-FD9595400AFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terradue.Cloud.Test", "Terradue.Cloud.Test\Terradue.Cloud.Test.csproj", "{B74DE2D9-3411-43CD-B5F0-BB0EBA1BEB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A359021F-906E-4B1C-92CC-FD9595400AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A359021F-906E-4B1C-92CC-FD9595400AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A359021F-906E-4B1C-92CC-FD9595400AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74DE2D9-3411-43CD-B5F0-BB0EBA1BEB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74DE2D9-3411-43CD-B5F0-BB0EBA1BEB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74DE2D9-3411-43CD-B5F0-BB0EBA1BEB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74DE2D9-3411-43CD-B5F0-BB0EBA1BEB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Terradue.Cloud\Terradue.Cloud.csproj

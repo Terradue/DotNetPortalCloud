@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Terradue.Cloud</id>
-    <version>1.2.6</version>
+    <version>1.2.9</version>
     <title>Terradue.Cloud</title>
     <authors>Terradue</authors>
-    <licenseUrl>https://github.com/Terradue/DotNetOpenSearch/blob/master/LICENSE</licenseUrl>-->
+    <!--<licenseUrl>https://github.com/Terradue/DotNetOpenSearch/blob/master/LICENSE</licenseUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Terradue.Cloud is a library targeting .NET 4.0 and above with base for all Terradue.Cloud</description>
     <summary>Terradue Cloud library for .Net</summary>
@@ -21,6 +21,7 @@
   </metadata>
   <files>
     <file src="Terradue.Cloud/bin/Terradue.Cloud.dll" target="lib/net40/Terradue.Cloud.dll" />
+    <file src="Terradue.Cloud/Resources/**/*" target="content/modules/cloud" />
   </files>
 
 </package>
