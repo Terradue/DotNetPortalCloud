@@ -35,12 +35,6 @@
     <Reference Include="Terradue.ServiceModel.Syndication">
       <HintPath>..\packages\Terradue.ServiceModel.Syndication.1.0.0.0\lib\net40\Terradue.ServiceModel.Syndication.dll</HintPath>
     </Reference>
-    <Reference Include="Terradue.OpenSearch">
-      <HintPath>..\packages\Terradue.OpenSearch.1.7.4\lib\net40\Terradue.OpenSearch.dll</HintPath>
-    </Reference>
-    <Reference Include="Terradue.ServiceModel.Ogc.OwsContext">
-      <HintPath>..\packages\Terradue.ServiceModel.Ogc.OwsContext.1.0.0\lib\net40\Terradue.ServiceModel.Ogc.OwsContext.dll</HintPath>
-    </Reference>
     <Reference Include="Terradue.Util">
       <HintPath>..\packages\Terradue.Util.1.4.0\lib\net40\Terradue.Util.dll</HintPath>
     </Reference>
@@ -50,15 +44,6 @@
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.1.0.7.30073\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Terradue.Portal">
-      <HintPath>..\packages\Terradue.Portal.2.5.11\lib\net40\Terradue.Portal.dll</HintPath>
-    </Reference>
-    <Reference Include="Terradue.Portal.AdminTool">
-      <HintPath>..\packages\Terradue.Portal.2.5.11\lib\net40\Terradue.Portal.AdminTool.exe</HintPath>
-    </Reference>
-    <Reference Include="Terradue.Portal.Agent">
-      <HintPath>..\packages\Terradue.Portal.2.5.11\lib\net40\Terradue.Portal.Agent.exe</HintPath>
-    </Reference>
     <Reference Include="CookComputing.XmlRpcV2">
       <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
@@ -66,6 +51,21 @@
       <HintPath>..\packages\Terradue.OpenNebula.1.0.0\lib\net40\Terradue.OpenNebula.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="Terradue.Portal">
+      <HintPath>..\packages\Terradue.Portal.2.6.0\lib\net40\Terradue.Portal.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.Portal.AdminTool">
+      <HintPath>..\packages\Terradue.Portal.2.6.0\lib\net40\Terradue.Portal.AdminTool.exe</HintPath>
+    </Reference>
+    <Reference Include="Terradue.Portal.Agent">
+      <HintPath>..\packages\Terradue.Portal.2.6.0\lib\net40\Terradue.Portal.Agent.exe</HintPath>
+    </Reference>
+    <Reference Include="Terradue.OpenSearch">
+      <HintPath>..\packages\Terradue.OpenSearch.1.8.2\lib\net40\Terradue.OpenSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Terradue.ServiceModel.Ogc.OwsContext">
+      <HintPath>..\packages\Terradue.ServiceModel.Ogc.OwsContext.1.0.5\lib\net40\Terradue.ServiceModel.Ogc.OwsContext.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
@@ -74,68 +74,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="core\db\db-0.1#.sql" />
-    <None Include="core\db\db-0.4#.sql" />
-    <None Include="core\db\db-0.4.5#.sql" />
-    <None Include="core\db\db-0.5#.sql" />
-    <None Include="core\db\db-0.5.1#.sql" />
-    <None Include="core\db\db-0.5.2#.sql" />
-    <None Include="core\db\db-0.5.3#.sql" />
-    <None Include="core\db\db-0.5.4#.sql" />
-    <None Include="core\db\db-0.5.5#.sql" />
-    <None Include="core\db\db-0.5.6#.sql" />
-    <None Include="core\db\db-0.5.7#.sql" />
-    <None Include="core\db\db-0.5.8#.sql" />
-    <None Include="core\db\db-0.5.9#.sql" />
-    <None Include="core\db\db-0.6.0#.sql" />
-    <None Include="core\db\db-0.6.1#.sql" />
-    <None Include="core\db\db-0.6.2#.sql" />
-    <None Include="core\db\db-0.6.3#.sql" />
-    <None Include="core\db\db-0.6.4#.sql" />
-    <None Include="core\db\db-0.6.5#.sql" />
-    <None Include="core\db\db-0.6.6#.sql" />
-    <None Include="core\db\db-0.6.7#.sql" />
-    <None Include="core\db\db-0.6.8#.sql" />
-    <None Include="core\db\db-0.6.9#.sql" />
-    <None Include="core\db\db-0.7.0#.sql" />
-    <None Include="core\db\db-0.7.1#.sql" />
-    <None Include="core\db\db-0.7.2#.sql" />
-    <None Include="core\db\db-0.7.3#.sql" />
-    <None Include="core\db\db-0.7.4#.sql" />
-    <None Include="core\db\db-0.7.5#.sql" />
-    <None Include="core\db\db-0.7.6#.sql" />
-    <None Include="core\db\db-0.7.7#.sql" />
-    <None Include="core\db\db-0.7.8#.sql" />
-    <None Include="core\db\db-0.7.9#.sql" />
-    <None Include="core\db\db-0.8.0#.sql" />
-    <None Include="core\db\db-0.8.1#.sql" />
-    <None Include="core\db\db-0.8.2#.sql" />
-    <None Include="core\db\db-0.8.3#.sql" />
-    <None Include="core\db\db-0.8.4#.sql" />
-    <None Include="core\db\db-0.8.5#.sql" />
-    <None Include="core\db\db-0.8.6#.sql" />
-    <None Include="core\db\db-0.8.7#.sql" />
-    <None Include="core\db\db-0.8.8#.sql" />
-    <None Include="core\db\db-0.8.9#.sql" />
-    <None Include="core\db\db-0.9.0#.sql" />
-    <None Include="core\db\db-0.9.1#.sql" />
-    <None Include="core\db\db-0.9.2#.sql" />
-    <None Include="core\db\db-0.9.3#.sql" />
-    <None Include="core\db\db-0.9.4#.sql" />
-    <None Include="core\db\db-0.9.5#.sql" />
-    <None Include="core\db\db-0.9.6#.sql" />
-    <None Include="core\db\db-0.9.7#.sql" />
-    <None Include="core\db\db-0.9.8#.sql" />
-    <None Include="core\db\db-0.9.9#.sql" />
-    <None Include="core\db\db-1.0.0#.sql" />
-    <None Include="core\db\db-1.0.1#.sql" />
-    <None Include="core\db\db-1.0.2#.sql" />
-    <None Include="core\db\db-1.0.3#.sql" />
-    <None Include="core\db\db-2.3#.sql" />
-    <None Include="core\db\db-2.3.001#.sql" />
-    <None Include="core\db\db-2.3.002#.sql" />
-    <None Include="core\db\db-2.3.003#.sql" />
-    <None Include="core\db\db-2.3.3#.sql" />
     <None Include="core\db\db-2.4#.sql" />
     <None Include="core\db\db-2.4c.sql" />
     <None Include="core\db\db-2.5#.sql" />
