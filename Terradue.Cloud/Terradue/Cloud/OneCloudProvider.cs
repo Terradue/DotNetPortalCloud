@@ -76,7 +76,16 @@ namespace Terradue.Cloud {
         //---------------------------------------------------------------------------------------------------------------------
 
         public void StartDelegate(string username){
-            xmlrpc.StartDelegate(username);
+            USER_POOL users = xmlrpc.UserGetPoolInfo();
+            foreach (object user in users.Items) {
+                if (user.GetType() == typeof(USER_POOLUSER)) {
+                    if (((USER_POOLUSER)user).NAME.Equals(username)) {
+                        xmlrpc.StartDelegate(username);
+                        return;
+                    }
+                }
+            }
+            throw new Exception(String.Format("User {0} not found on One Cloud Provider",username));
         }
 
         //---------------------------------------------------------------------------------------------------------------------
