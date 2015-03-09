@@ -128,8 +128,9 @@ namespace Terradue.Cloud {
 
                     foreach (XmlNode nodeT in template) {
                         if (aws) {
-                            if (nodeT.Name == "EXT_IP") {
-                                hostname = nodeT.InnerText;
+                            if (nodeT.Name.Contains("_PUBLICADDRESSES")) {
+                                var ips = nodeT.InnerText.Split(",".ToCharArray());
+                                hostname = ips[0];
                                 break;
                             }
                         } else {
