@@ -17,6 +17,32 @@ using Terradue.OpenNebula;
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
+/*!
+
+\defgroup CloudProvider Cloud Provider
+@{
+
+This component is an extension of \ref ComputingResource for providing with WPS Server as a processing resource.
+It has two main functions:
+- analyses the GetCapabilities() function of the WPS server to retrieve all the process offered.
+- submits, controls and montiors processing over a WPS Server
+
+\xrefitem mvc_c "Controller" "Controller elements"
+
+\ingroup Cloud
+
+\xrefitem int "Interfaces" "External Interfaces" proxy data series items via \ref OpenSearch 
+
+\xrefitem dep "Dependencies" "Dependencies" \ref core_DataModelAccess stores persistently the series information in the database
+
+\xrefitem dep "Dependencies" "Dependencies" \ref core_UserGroupACL controls the access on the series
+
+\ingroup core
+
+
+@}
+ */
+
 
 namespace Terradue.Cloud {
 

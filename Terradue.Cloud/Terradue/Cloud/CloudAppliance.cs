@@ -6,6 +6,27 @@ using System.Runtime.Serialization;
 using System.Net;
 using System.Collections.Generic;
 
+/*!
+
+\defgroup CloudAppliance Cloud Applicance
+@{
+
+The component represents an abstract Cloud Appliance available as a computing resources.
+Practically, a class that implements \ref Terradue.Cloud#CloudAppliance represents a virtual machine
+running on a \ref Terradue.Cloud#CloudProvider
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Persistence stores/loads persistently the appliance in the database
+
+\xrefitem dep "Dependencies" "Dependencies" \ref CloudProvider controls the appliance
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Authorisation controls the access on the appliance
+
+
+@}
+*/
+
 namespace Terradue.Cloud {
 
     
@@ -14,7 +35,9 @@ namespace Terradue.Cloud {
     //-------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------
 
-    
+
+    /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+    /// \ingroup CloudApplicance
 	[Serializable]
 	[DataContract]
     [EntityTable("cloud", EntityTableConfiguration.Custom, HasOwnerReference = true, HasExtensions = true, NameField = "caption")]
@@ -31,7 +54,9 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Gets (or sets) the provider to which the appliance belongs.</summary>
+        /// <summary>Get (or set) the provider to which the appliance belongs.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+        /// \return is provisioned by \ref Terradue.Cloud#CloudProvider that controls the appliance
 		[IgnoreDataMember]
         public CloudProvider Provider {
             get {
@@ -45,7 +70,9 @@ namespace Terradue.Cloud {
         }
 
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// <summary>Get (or set) the remote identifier that identifies the applicance on the \ref CloudProvider</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		[EntityDataField("remote_id")]
         public string RemoteId { get; protected set; }
@@ -67,6 +94,7 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		[EntityDataField("hostname")]
         public virtual string Hostname { 
@@ -90,6 +118,7 @@ namespace Terradue.Cloud {
 		[DataMember]
         public string Username { get; set; }
 
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		public string Owner { get; set; }
 
@@ -105,17 +134,22 @@ namespace Terradue.Cloud {
 		}
 
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// <summary>The template the appliance has been instantiated from.</summary>
+        /// \return is specified by \ref Terradue.Cloud#VirtualMachineTemplate that describe the appliance specifications (CPU, memory, network...)
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
         public abstract VirtualMachineTemplate VirtualMachineTemplate { get; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
         public abstract VirtualDisk[] VirtualDisks { get; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
         public abstract VirtualNetwork VirtualNetwork { get; }
         
@@ -125,8 +159,9 @@ namespace Terradue.Cloud {
         public ProcessorArchitecture Architecture { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
         /// <summary>Gets the number of CPU cores assigned to the instance.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public int Cores { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
@@ -137,10 +172,12 @@ namespace Terradue.Cloud {
         //---------------------------------------------------------------------------------------------------------------------
         
         /// <summary>Gets the maximum RAM allocated to the instance in gigabytes.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		public float Memory { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public virtual MachineState State { get; protected set; }
 
 
@@ -153,7 +190,7 @@ namespace Terradue.Cloud {
         /// <summary>Returns an instance of a CloudAppliance subclass representing the cloud appliance with the specified ID.</summary>
         /// <param name="context">the execution environment context</param>
         /// <param name="id">the cloud appliance ID</param>
-        /// <returns>the created CloudAppliance subclass instance</returns>
+        /// <returns>the created Terradue.Cloud#CloudAppliance subclass instance</returns>
         public static CloudAppliance FromId(IfyContext context, int id) {
             EntityType entityType = EntityType.GetEntityType(typeof(CloudAppliance));
             CloudAppliance result = (CloudAppliance)entityType.GetEntityInstanceFromId(context, id); 
@@ -167,23 +204,28 @@ namespace Terradue.Cloud {
         public abstract bool Create();
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Start();
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Stop(MachineStopMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Suspend(MachineSuspendMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Resume(MachineRestartMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Shutdown(MachineStopMethod method);
 
         //---------------------------------------------------------------------------------------------------------------------

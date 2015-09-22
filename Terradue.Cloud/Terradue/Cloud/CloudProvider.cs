@@ -15,7 +15,28 @@ using Terradue.Portal;
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
+/*!
 
+\defgroup Cloud Cloud
+@{
+@}
+
+\defgroup CloudProvider Cloud Provider
+@{
+
+The component represents an abstract Cloud Provider available for provisiong ICT resources.
+Practically, a class that implements \ref Terradue.Cloud#CloudProvider is in charge of implementing 
+the actions that the API it implements offers.
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Persistence stores/loads persistently the series information in the database
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Authorisation controls the access on the provider
+
+
+@}
+*/
 
 
 namespace Terradue.Cloud {
@@ -26,9 +47,9 @@ namespace Terradue.Cloud {
     //-------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------
 
-    
 
-    //! Represents a Globus computing resource that is accessed through an LGE interface.
+    /// \ingroup CloudProvider
+    /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
     [EntityTable("cloudprov", EntityTableConfiguration.Custom, HasExtensions = true, NameField = "caption")]
     public abstract class CloudProvider : Entity {
         
@@ -41,7 +62,8 @@ namespace Terradue.Cloud {
         }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         [EntityDataField("address")]
         public string AccessPoint { get; set; }
         
@@ -86,21 +108,25 @@ namespace Terradue.Cloud {
         //---------------------------------------------------------------------------------------------------------------------
 
         /// <summary>In a derived class, queries the cloud provider to get a list of the virtual machine templates defined on it.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract VirtualMachineTemplate[] FindVirtualMachineTemplates(bool detailed);
         
         //---------------------------------------------------------------------------------------------------------------------
         
         /// <summary>In a derived class, queries the cloud provider to get a list of the virtual disks defined on it.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract VirtualDisk[] FindVirtualDisks(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
 
         /// <summary>In a derived class, queries the cloud provider to get a list of the virtual networks defined on it.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract VirtualNetwork[] FindVirtualNetworks(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
         
         /// <summary>In a derived class, queries the cloud provider to get a list of the cloud appliances created on it.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract CloudAppliance[] FindAppliances(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
@@ -108,7 +134,8 @@ namespace Terradue.Cloud {
         public abstract VirtualNetwork GetNetwork(string remoteId);
 
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract CloudAppliance CreateInstance(string caption, string templateName, string[] diskNames, string networkName);
 
         //---------------------------------------------------------------------------------------------------------------------
