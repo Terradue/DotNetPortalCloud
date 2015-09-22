@@ -18,7 +18,24 @@ using Terradue.OpenNebula;
 //-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------
 
+/*!
 
+\defgroup OneCloudAppliance OpenNebula Cloud Applicance
+@{
+
+The component represents a Cloud Appliance on \ref OneCloudProvider by extending the \ref CloudAppliance module
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref OneCloudProvider controls the appliance on OpenNebula platform
+
+\xrefitem dep "Dependencies" "Dependencies" implements \ref CloudAppliance for OpenNebula appliance
+
+\xrefitem dep "Dependencies" "Dependencies" calls \ref OneClient to performs the appliance operations on OpenNebula
+
+
+@}
+*/
 
 
 
