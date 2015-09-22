@@ -110,11 +110,16 @@ namespace Terradue.Cloud {
         private string hostname { get; set; }
         public override string Hostname{
             get{ 
+                context.LogDebug(typeof(OneCloudAppliance),String.Format ("Hostname = {0}",hostname));
                 if (hostname == null || hostname == "localhost") {
+                    context.LogDebug(typeof(OneCloudAppliance),String.Format ("Get hostname - VM is {0}null",Vm == null ? "" : "not "));
                     XmlNode[] template = (XmlNode[])Vm.TEMPLATE;
                     bool aws = false;
 
+                    context.LogDebug(typeof(OneCloudAppliance),String.Format ("Get hostname - VMtemplate is {0}null",Vm.TEMPLATE == null ? "" : "not "));
+
                     foreach (XmlNode nodeT in template) {
+                        context.LogDebug(typeof(OneCloudAppliance),String.Format ("Inside template - {0}",nodeT.Name));
                         if (nodeT.Name == "CONTEXT") {
                             try{
                                 aws = (nodeT["PUBLIC"].InnerText == "aws-ec2");
@@ -134,7 +139,9 @@ namespace Terradue.Cloud {
                                 break;
                             }
                         } else {
+                            context.LogDebug(typeof(OneCloudAppliance),String.Format ("Inside template(2) - {0}",nodeT.Name));
                             if (nodeT.Name == "NIC") {
+                                context.LogDebug(typeof(OneCloudAppliance),String.Format ("Hostname is now - {0}",nodeT["IP"].InnerText));
                                 hostname = nodeT["IP"].InnerText;
                                 break;
                             }
