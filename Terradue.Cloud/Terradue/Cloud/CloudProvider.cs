@@ -54,6 +54,10 @@ namespace Terradue.Cloud {
     //-------------------------------------------------------------------------------------------------------------------------
 
 
+    /// <summary>Cloud Provider</summary>
+    /// <description>
+    /// A cloud provider represents the entity that provision \ref CloudAppliance on its infrastructure.
+    /// </description>
     /// \ingroup CloudProvider
     /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
     [EntityTable("cloudprov", EntityTableConfiguration.Custom, HasExtensions = true, NameField = "caption")]
@@ -69,6 +73,7 @@ namespace Terradue.Cloud {
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// <summary>Access Point URL of the cloud provider.</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         [EntityDataField("address")]
         public string AccessPoint { get; set; }
@@ -113,25 +118,22 @@ namespace Terradue.Cloud {
         
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>In a derived class, queries the cloud provider to get a list of the virtual machine templates defined on it.</summary>
-        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+        /// <summary>Queries the cloud provider to get a list of the virtual machine templates defined on it.</summary>
         public abstract VirtualMachineTemplate[] FindVirtualMachineTemplates(bool detailed);
         
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>In a derived class, queries the cloud provider to get a list of the virtual disks defined on it.</summary>
-        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+        /// <summary>Queries the cloud provider to get a list of the virtual disks defined on it.</summary>
         public abstract VirtualDisk[] FindVirtualDisks(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>In a derived class, queries the cloud provider to get a list of the virtual networks defined on it.</summary>
-        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+        /// <summary>Queries the cloud provider to get a list of the virtual networks defined on it.</summary>
         public abstract VirtualNetwork[] FindVirtualNetworks(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>In a derived class, queries the cloud provider to get a list of the cloud appliances created on it.</summary>
+        /// <summary>Queries the cloud provider to get a list of the cloud appliances created on it.</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract CloudAppliance[] FindAppliances(bool detailed);
 

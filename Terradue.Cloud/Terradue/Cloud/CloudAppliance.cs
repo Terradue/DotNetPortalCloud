@@ -38,6 +38,11 @@ namespace Terradue.Cloud {
 
     /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
     /// \ingroup CloudApplicance
+    /// <summary>Cloud Appliance</summary>
+    /// <description>
+    /// A Cloud Appliance represents any virtual machine running on a cloud infrastructure. It is a generic object intended to be
+    /// extended to implement a specific architecture.
+    /// </description>
 	[Serializable]
 	[DataContract]
     [EntityTable("cloud", EntityTableConfiguration.Custom, HasOwnerReference = true, HasExtensions = true, NameField = "caption")]
@@ -54,7 +59,7 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Get (or set) the provider to which the appliance belongs.</summary>
+        /// <summary>Provider of the cloud appliance</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         /// \return is provisioned by \ref Terradue.Cloud#CloudProvider that controls the appliance
 		[IgnoreDataMember]
@@ -71,7 +76,7 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>Get (or set) the remote identifier that identifies the applicance on the \ref CloudProvider</summary>
+        /// <summary>Remote identifier that identifies the applicance on the \ref CloudProvider</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		[EntityDataField("remote_id")]
@@ -94,6 +99,7 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// <summary>hostname of the cloud appliance to identify it on the network</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		[EntityDataField("hostname")]
@@ -118,6 +124,7 @@ namespace Terradue.Cloud {
 		[DataMember]
         public string Username { get; set; }
 
+        /// <summary>Owner of the cloud appliance</summary>.
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		public string Owner { get; set; }
@@ -155,28 +162,29 @@ namespace Terradue.Cloud {
         
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>Gets the Architecture of the instance.</summary>
+        /// <summary></summary>Architecture of the instance.</summary>
         public ProcessorArchitecture Architecture { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>Gets the number of CPU cores assigned to the instance.</summary>
+        /// <summary>Number of CPU cores assigned to the instance.</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public int Cores { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Gets the CPU clock frequency (speed) in GHz.</summary>
+        /// <summary>CPU clock frequency (speed) in GHz.</summary>
 		public float Speed { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Gets the maximum RAM allocated to the instance in gigabytes.</summary>
+        /// <summary>Maximum RAM allocated to the instance in gigabytes.</summary>
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		public float Memory { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// Current state of the cloud appliance (stopped, started, paused...)
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public virtual MachineState State { get; protected set; }
 
@@ -205,27 +213,31 @@ namespace Terradue.Cloud {
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// Start the cloud appliance
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Start();
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// Stop the cloud appliance
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Stop(MachineStopMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// Susspend the cloud appliance
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Suspend(MachineSuspendMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// Resume the cloud appliance
         /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Resume(MachineRestartMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+        /// Shutdown the cloud appliance
         public abstract bool Shutdown(MachineStopMethod method);
 
         //---------------------------------------------------------------------------------------------------------------------
