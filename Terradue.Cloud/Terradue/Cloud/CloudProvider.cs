@@ -20,9 +20,9 @@ using Terradue.Portal;
 \defgroup Cloud Cloud
 @{
 
-This compoenent is a set of .NET libraries that enables the cloud functionalities of the portal. The portal
-communicates to the cloud via interfaces that controls typical cloud objects duch as cloud providers, cloud appliance,
-virtual machine template, virtual disk or network. One or more implementation can be used in the compoenent according
+This component is a set of libraries that enables the cloud functionalities of the portal. The portal
+communicates to the cloud via interfaces that controls typical cloud objects such as cloud providers, cloud appliance,
+virtual machine template, virtual disk or network. One or more implementation can be used in the component according
 to the cloud interface used.
 
 @}
