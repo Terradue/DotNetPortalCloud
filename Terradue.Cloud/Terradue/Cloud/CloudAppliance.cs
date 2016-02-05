@@ -6,6 +6,27 @@ using System.Runtime.Serialization;
 using System.Net;
 using System.Collections.Generic;
 
+/*!
+
+\defgroup CloudAppliance Cloud Applicance
+@{
+
+The component represents an abstract Cloud Appliance available as a computing resources.
+Practically, a class that implements \ref Terradue.Cloud#CloudAppliance represents a virtual machine
+running on a \ref Terradue.Cloud#CloudProvider
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Persistence stores/loads persistently the appliance in the database
+
+\xrefitem dep "Dependencies" "Dependencies" \ref CloudProvider controls the appliance
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Authorisation controls the access on the appliance
+
+
+@}
+*/
+
 namespace Terradue.Cloud {
 
     
@@ -14,7 +35,14 @@ namespace Terradue.Cloud {
     //-------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------
 
-    
+
+    /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+    /// \ingroup CloudApplicance
+    /// <summary>Cloud Appliance</summary>
+    /// <description>
+    /// A Cloud Appliance represents any virtual machine running on a cloud infrastructure. It is a generic object intended to be
+    /// extended to implement a specific architecture.
+    /// </description>
 	[Serializable]
 	[DataContract]
     [EntityTable("cloud", EntityTableConfiguration.Custom, HasOwnerReference = true, HasExtensions = true, NameField = "caption")]
@@ -31,7 +59,9 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Gets (or sets) the provider to which the appliance belongs.</summary>
+        /// <summary>Provider of the cloud appliance</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+        /// \return is provisioned by \ref Terradue.Cloud#CloudProvider that controls the appliance
 		[IgnoreDataMember]
         public CloudProvider Provider {
             get {
@@ -45,7 +75,9 @@ namespace Terradue.Cloud {
         }
 
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// <summary>Remote identifier that identifies the applicance on the \ref CloudProvider</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		[EntityDataField("remote_id")]
         public string RemoteId { get; protected set; }
@@ -67,6 +99,8 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// <summary>hostname of the cloud appliance to identify it on the network</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		[EntityDataField("hostname")]
         public virtual string Hostname { 
@@ -90,6 +124,8 @@ namespace Terradue.Cloud {
 		[DataMember]
         public string Username { get; set; }
 
+        /// <summary>Owner of the cloud appliance</summary>.
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
 		public string Owner { get; set; }
 
@@ -105,42 +141,51 @@ namespace Terradue.Cloud {
 		}
 
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// <summary>The template the appliance has been instantiated from.</summary>
+        /// \return is specified by \ref Terradue.Cloud#VirtualMachineTemplate that describe the appliance specifications (CPU, memory, network...)
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
         public abstract VirtualMachineTemplate VirtualMachineTemplate { get; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
         public abstract VirtualDisk[] VirtualDisks { get; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		[DataMember]
         public abstract VirtualNetwork VirtualNetwork { get; }
         
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>Gets the Architecture of the instance.</summary>
+        /// <summary></summary>Architecture of the instance.</summary>
         public ProcessorArchitecture Architecture { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
-        /// <summary>Gets the number of CPU cores assigned to the instance.</summary>
+
+        /// <summary>Number of CPU cores assigned to the instance.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public int Cores { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Gets the CPU clock frequency (speed) in GHz.</summary>
+        /// <summary>CPU clock frequency (speed) in GHz.</summary>
 		public float Speed { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>Gets the maximum RAM allocated to the instance in gigabytes.</summary>
+        /// <summary>Maximum RAM allocated to the instance in gigabytes.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
 		public float Memory { get; protected set; }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// Current state of the cloud appliance (stopped, started, paused...)
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public virtual MachineState State { get; protected set; }
 
 
@@ -153,7 +198,7 @@ namespace Terradue.Cloud {
         /// <summary>Returns an instance of a CloudAppliance subclass representing the cloud appliance with the specified ID.</summary>
         /// <param name="context">the execution environment context</param>
         /// <param name="id">the cloud appliance ID</param>
-        /// <returns>the created CloudAppliance subclass instance</returns>
+        /// <returns>the created Terradue.Cloud#CloudAppliance subclass instance</returns>
         public static CloudAppliance FromId(IfyContext context, int id) {
             EntityType entityType = EntityType.GetEntityType(typeof(CloudAppliance));
             CloudAppliance result = (CloudAppliance)entityType.GetEntityInstanceFromId(context, id); 
@@ -167,23 +212,32 @@ namespace Terradue.Cloud {
         public abstract bool Create();
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// Start the cloud appliance
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Start();
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// Stop the cloud appliance
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Stop(MachineStopMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// Susspend the cloud appliance
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Suspend(MachineSuspendMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// Resume the cloud appliance
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract bool Resume(MachineRestartMethod method);
         
         //---------------------------------------------------------------------------------------------------------------------
 
+        /// Shutdown the cloud appliance
         public abstract bool Shutdown(MachineStopMethod method);
 
         //---------------------------------------------------------------------------------------------------------------------

@@ -17,6 +17,23 @@ using Terradue.OpenNebula;
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
+/*!
+
+\defgroup OneCloudProvider OpenNebula Cloud Provider
+@{
+
+The component represents a Cloud Provider for an OpenNebula instance by extending the \ref CloudProvider module
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" implements \ref CloudProvider for OpenNebula
+
+\xrefitem dep "Dependencies" "Dependencies" calls \ref OneClient to performs the provider operations on OpenNebula
+
+
+@}
+*/
+
 
 namespace Terradue.Cloud {
 

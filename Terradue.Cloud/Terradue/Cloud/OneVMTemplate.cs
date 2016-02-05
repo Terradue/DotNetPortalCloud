@@ -15,7 +15,24 @@ using Terradue.OpenNebula;
 //-----------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 
+/*!
 
+\defgroup OneVMTemplate OpenNebula Virtual Machine Template
+@{
+
+The component represents a Virtual Machine Template in OpenNebula to instantiate a \ref OneCloudApppliance by extending \ref VirtualMachineTemplate.
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref OneCloudProvider controls the appliance on OpenNebula platform
+
+\xrefitem dep "Dependencies" "Dependencies" implements \ref VirtualMachineTemplate for OpenNebula VM Template
+
+\xrefitem dep "Dependencies" "Dependencies" calls \ref OneClient to performs the template operations on OpenNebula
+
+
+@}
+*/
 
 
 

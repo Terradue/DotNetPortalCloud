@@ -15,7 +15,34 @@ using Terradue.Portal;
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
+/*!
 
+\defgroup Cloud Cloud
+@{
+
+This component is a set of libraries that enables the cloud functionalities of the portal. The portal
+communicates to the cloud via interfaces that controls typical cloud objects such as cloud providers, cloud appliance,
+virtual machine template, virtual disk or network. One or more implementation can be used in the component according
+to the cloud interface used.
+
+@}
+
+\defgroup CloudProvider Cloud Provider
+@{
+
+The component represents an abstract Cloud Provider available for provisiong ICT resources.
+Practically, a class that implements \ref Terradue.Cloud#CloudProvider is in charge of implementing 
+the actions that the API it implements offers.
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Persistence stores/loads persistently the series information in the database
+
+\xrefitem dep "Dependencies" "Dependencies" \ref Authorisation controls the access on the provider
+
+
+@}
+*/
 
 
 namespace Terradue.Cloud {
@@ -26,9 +53,13 @@ namespace Terradue.Cloud {
     //-------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------
 
-    
 
-    //! Represents a Globus computing resource that is accessed through an LGE interface.
+    /// <summary>Cloud Provider</summary>
+    /// <description>
+    /// A cloud provider represents the entity that provision \ref CloudAppliance on its infrastructure.
+    /// </description>
+    /// \ingroup CloudProvider
+    /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
     [EntityTable("cloudprov", EntityTableConfiguration.Custom, HasExtensions = true, NameField = "caption")]
     public abstract class CloudProvider : Entity {
         
@@ -41,7 +72,9 @@ namespace Terradue.Cloud {
         }
         
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// <summary>Access Point URL of the cloud provider.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         [EntityDataField("address")]
         public string AccessPoint { get; set; }
         
@@ -85,22 +118,23 @@ namespace Terradue.Cloud {
         
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>In a derived class, queries the cloud provider to get a list of the virtual machine templates defined on it.</summary>
+        /// <summary>Queries the cloud provider to get a list of the virtual machine templates defined on it.</summary>
         public abstract VirtualMachineTemplate[] FindVirtualMachineTemplates(bool detailed);
         
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>In a derived class, queries the cloud provider to get a list of the virtual disks defined on it.</summary>
+        /// <summary>Queries the cloud provider to get a list of the virtual disks defined on it.</summary>
         public abstract VirtualDisk[] FindVirtualDisks(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>In a derived class, queries the cloud provider to get a list of the virtual networks defined on it.</summary>
+        /// <summary>Queries the cloud provider to get a list of the virtual networks defined on it.</summary>
         public abstract VirtualNetwork[] FindVirtualNetworks(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
         
-        /// <summary>In a derived class, queries the cloud provider to get a list of the cloud appliances created on it.</summary>
+        /// <summary>Queries the cloud provider to get a list of the cloud appliances created on it.</summary>
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract CloudAppliance[] FindAppliances(bool detailed);
 
         //---------------------------------------------------------------------------------------------------------------------
@@ -108,7 +142,8 @@ namespace Terradue.Cloud {
         public abstract VirtualNetwork GetNetwork(string remoteId);
 
         //---------------------------------------------------------------------------------------------------------------------
-        
+
+        /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
         public abstract CloudAppliance CreateInstance(string caption, string templateName, string[] diskNames, string networkName);
 
         //---------------------------------------------------------------------------------------------------------------------

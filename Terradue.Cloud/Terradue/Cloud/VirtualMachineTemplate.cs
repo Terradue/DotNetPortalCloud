@@ -1,20 +1,25 @@
 using System;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Terradue.Portal;
 
+/*!
+
+\defgroup VirtualMachineTemplate Virtual Machine Template
+@{
+
+The component represents an abstract Virtual Machine Template to instantiate a \ref CloudApppliance.
+Practically, a class that implements \ref Terradue.Cloud#VirtualMachineTemplate represents a specification
+of the virtual machine to instantiate on a \ref Terradue.Cloud#CloudProvider
+
+\ingroup Cloud
+
+\xrefitem dep "Dependencies" "Dependencies" \ref CloudProvider provides with the virtual machines templates
 
 
-
-
-//-----------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------
-using System.Runtime.Serialization;
-
-
+@}
+*/
 
 
 
@@ -28,7 +33,8 @@ namespace Terradue.Cloud {
 
     
 
-    //! Represents a Globus computing resource that is accessed through an LGE interface.
+    /// \xrefitem rmodp "RM-ODP" "RM-ODP Documentation"
+    /// \ingroup VirtualMachineTemplate
 	[Serializable]
 	[DataContract]
     public class VirtualMachineTemplate : VirtualResource {
@@ -36,7 +42,7 @@ namespace Terradue.Cloud {
         //---------------------------------------------------------------------------------------------------------------------
 
         /// <summary>
-        /// Gets or sets the additional content to be add to the template during the instanciation
+        /// Gets or sets the additional content to be add to the template during the instantiation
         /// </summary>
         /// <value>The additional content of the template.</value>
         public string AdditionalContent { get; set; }
