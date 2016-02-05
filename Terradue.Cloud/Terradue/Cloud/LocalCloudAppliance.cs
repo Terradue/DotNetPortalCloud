@@ -17,6 +17,7 @@ using Terradue.OpenNebula;
 //-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------
+using System.Linq;
 
 
 
@@ -137,11 +138,22 @@ namespace Terradue.Cloud {
             result.RemoteId = sbXmlDoc.SelectSingleNode ("/VM/ID").InnerText;
             XmlNode itnode = sbXmlDoc.SelectSingleNode("/VM/TEMPLATE/INSTANCE_TYPE");
             result.Network = new OneNetwork (context);
-            result.Network.IpAddress = sbXmlDoc.SelectSingleNode ("/VM/TEMPLATE/NIC/IP").InnerText;
+            result.Network.IpAddress = GetLocalIPAddress();
             result.State = MachineState.Active;
             result.StatusText = "ACTIVE";
             return result;
 
+        }
+
+        private static string GetLocalIPAddress(){
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) return "localhost";
+
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            var ipaddress = host
+                .AddressList
+                .FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+
+            return ipaddress.ToString();
         }
         
         //---------------------------------------------------------------------------------------------------------------------
