@@ -1,4 +1,4 @@
--- VERSION 1.3
+-- VERSION 2.0
 
 USE $MAIN$;
 
@@ -19,12 +19,16 @@ CALL add_type($ID$, 'Terradue.Cloud.OcciCloudProvider, Terradue.Cloud', 'Terradu
 CALL add_type($ID$, 'Terradue.Cloud.OneCloudProvider, Terradue.Cloud', 'Terradue.Cloud.CloudProvider, Terradue.Cloud', 'OpenNebula Cloud Provider', 'OpenNebula Cloud Providers', NULL);
 -- RESULT
 
--- Adding manager privileges for cloud providers ... \
-INSERT INTO priv (id_type, operation, pos, name) VALUES
-    (@type_id, 'v', @priv_pos + 1, 'Cloud providers: view'),
-    (@type_id, 'm', @priv_pos + 2, 'Cloud providers: control'),
-    (@type_id, 'V', @priv_pos + 3, 'Cloud providers: view public'),
-    (@type_id, 'A', @priv_pos + 4, 'Cloud providers: assign public')
+/*****************************************************************************/
+
+-- Adding privileges for cloud providers ... \
+INSERT INTO priv (identifier, id_type, operation, pos, name) VALUES
+    ('cloudprov-c', @type_id, 'c', @priv_pos + 1, 'Cloud providers: create'),
+    ('cloudprov-s', @type_id, 's', @priv_pos + 2, 'Cloud providers: search'),
+    ('cloudprov-v', @type_id, 'v', @priv_pos + 3, 'Cloud providers: view'),
+    ('cloudprov-m', @type_id, 'm', @priv_pos + 4, 'Cloud providers: change'),
+    ('cloudprov-M', @type_id, 'M', @priv_pos + 5, 'Cloud providers: control'),
+    ('cloudprov-d', @type_id, 'd', @priv_pos + 6, 'Cloud providers: delete')
 ;
 -- RESULT
 
@@ -37,12 +41,14 @@ CALL add_type($ID$, 'Terradue.Cloud.OcciCloudAppliance, Terradue.Cloud', 'Terrad
 CALL add_type($ID$, 'Terradue.Cloud.OneCloudAppliance, Terradue.Cloud', 'Terradue.Cloud.CloudAppliance, Terradue.Cloud', 'OpenNebula Cloud Appliance', 'OpenNebula Cloud Appliances', NULL);
 -- RESULT
 
--- Adding manager privileges for cloud appliances ... \
-INSERT INTO priv (id_type, operation, pos, name) VALUES
-    (@type_id, 'v', @priv_pos + 5, 'Cloud appliances: view'),
-    (@type_id, 'm', @priv_pos + 6, 'Cloud appliances: control'),
-    (@type_id, 'V', @priv_pos + 7, 'Cloud appliances: view public'),
-    (@type_id, 'A', @priv_pos + 8, 'Cloud appliances: assign public')
+-- Adding privileges for cloud appliances ... \
+INSERT INTO priv (identifier, id_type, operation, pos, name) VALUES
+    ('cloud-c', @type_id, 'c', @priv_pos + 1, 'Cloud appliances: create'),
+    ('cloud-s', @type_id, 's', @priv_pos + 2, 'Cloud appliances: search'),
+    ('cloud-v', @type_id, 'v', @priv_pos + 3, 'Cloud appliances: view'),
+    ('cloud-m', @type_id, 'm', @priv_pos + 4, 'Cloud appliances: change'),
+    ('cloud-M', @type_id, 'M', @priv_pos + 5, 'Cloud appliances: control'),
+    ('cloud-d', @type_id, 'd', @priv_pos + 6, 'Cloud appliances: delete')
 ;
 -- RESULT
 
@@ -75,7 +81,7 @@ CREATE TABLE occicloudprov (
 CREATE TABLE onecloudprov (
     id int unsigned NOT NULL,
     admin_usr varchar(25) NOT NULL COMMENT 'XML-RPC admin username',
-	admin_pwd varchar(100) NOT NULL COMMENT 'XML-RPC admin password',
+    admin_pwd varchar(100) NOT NULL COMMENT 'XML-RPC admin password',
     CONSTRAINT pk_onecloudprov PRIMARY KEY (id),
     CONSTRAINT fk_onecloudprov_cloudprov FOREIGN KEY (id) REFERENCES cloudprov(id) ON DELETE CASCADE
 ) Engine=InnoDB COMMENT 'OpenNebula cloud providers';
