@@ -17,11 +17,9 @@ namespace Terradue.Cloud {
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        public override string AlternativeIdentifyingCondition{
-            get { 
-                if (UserId != 0 && ProviderId != 0) return String.Format("t1.id={0} AND t1.id_provider={1}",UserId,ProviderId); 
-                return null;
-            }
+        public override string GetIdentifyingConditionSql(){
+            if (UserId != 0 && ProviderId != 0) return String.Format("t1.id={0} AND t1.id_provider={1}",UserId,ProviderId); 
+            return null;
         }
 
         //---------------------------------------------------------------------------------------------------------------------
