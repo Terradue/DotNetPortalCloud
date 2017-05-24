@@ -2,61 +2,54 @@
 using NUnit.Framework;
 using System.IO;
 using Terradue.Portal;
+using System.Text.RegularExpressions;
 
 namespace Terradue.Test {
     public class BaseTest : AdminTool {
 
         protected IfyContext context;
-        string connectionString = "Server=localhost; Port=3306; User Id=root; Database=TerradueCloudTest";
+        private string connectionString;
+
+        protected string DatabaseName { get; set; }
+        protected string BaseDirectory { get; set; }
+
+        public string GetConnectionString() {
+            string result = "Server=localhost; Port=3306; User Id=root; Database=TerradueCloudTest";
+            bool replaceDatabaseName = (DatabaseName != null);
+            Match match = Regex.Match(result, "Database=([^;]+)");
+            if (replaceDatabaseName) {
+                if (match.Success) result = result.Replace(match.Value, "Database=" + DatabaseName);
+                else result += "; Database=" + DatabaseName;
+            } else {
+                if (match.Success) DatabaseName = match.Groups[1].Value;
+                else throw new Exception("No database name specified");
+            }
+            return result;
+        }
 
         [TestFixtureSetUp]
         public virtual void FixtureSetup() {
+            connectionString = GetConnectionString();
+            if (BaseDirectory == null) BaseDirectory = Directory.GetCurrentDirectory() + "/../database";
 
-            create = true;
-
-            dbMainSchema = "TerradueCloudTest";
-            currentSchema = dbMainSchema;
-            Verbose = false;
-            siteRootDir = "../..";
+            AdminTool adminTool = new AdminTool(DataDefinitionMode.Create, BaseDirectory, null, connectionString);
 
             try {
-                OpenConnection(connectionString);
-                schemaExists = true;
-            } catch (Exception e) {
-                if (!e.Message.Contains("Unknown database"))
-                    throw e;
-            }
-
-            try {
-                CreateSchemas();
-            } catch (Exception e) {
-                Console.Error.WriteLine(e.Message);
-                throw e;
-            }
-
-            Site site;
-            CoreModule core = new CoreModule(this, "../core");
-            core.Install();
-
-            CloseConnection();
-
-            try {
+                adminTool.Process();
                 context = IfyContext.GetLocalContext(connectionString, false);
                 context.Open();
+                context.LoadConfiguration();
             } catch (Exception e) {
                 Console.Error.WriteLine(e.Message);
-                throw e;
+                throw;
             }
-
-
         }
 
         [TestFixtureTearDown]
-        public virtual void TestFixtureTearDown() {
+        public virtual void FixtureTearDown() {
+
+            //context.Execute(String.Format("DROP DATABASE {0};", DatabaseName));
             context.Close();
-            OpenConnection(connectionString);
-            Execute("DROP DATABASE $MAIN$;");
-            CloseConnection();
         }
     }
 }
