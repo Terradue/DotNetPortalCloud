@@ -4,7 +4,7 @@
 @{
     Terradue Cloud module deals with the layer communicating with Cloud Providers interfaces. It provides with an abstract layer to cloud functionalities such as virtual machine provisioning, network infrastructure configuration, disks volumes mountage...
 
-    \xrefitem sw_version "Versions" "Software Package Version" 1.3.1
+    \xrefitem sw_version "Versions" "Software Package Version" 1.3.2
 
     \xrefitem sw_link "Links" "Software Package List" [Terradue.Cloud](https://git.terradue.com/sugar/terradue-cloud)
 
@@ -36,7 +36,7 @@ using NuGet4Mono.Extensions;
 [assembly: AssemblyLicenseUrl ("")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
-[assembly: AssemblyVersion ("1.3.1")]
-[assembly: AssemblyInformationalVersion ("1.3.1")]
+[assembly: AssemblyVersion ("1.3.2")]
+[assembly: AssemblyInformationalVersion ("1.3.2")]
 
 [assembly: log4net.Config.XmlConfigurator (ConfigFile = "log4net.config", Watch = true)]
