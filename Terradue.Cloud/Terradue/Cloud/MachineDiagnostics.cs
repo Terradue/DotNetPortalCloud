@@ -153,6 +153,13 @@ namespace Terradue.Cloud {
                 return match.Groups;
 
             }
+            
+            regex = new Regex("^KiB Mem : *(?<total>[0-9]*) total, *(?<free>[0-9]*) free, *(?<used>[0-9]*) used, *(?<buffers>[0-9]*) buff\\/cache$", RegexOptions.Multiline);
+
+            foreach (Match match in regex.Matches(physMem)) {
+                return match.Groups;
+
+            }
 
             throw new SystemException(string.Format("Wrong Mem Linux Diagnostic : {0}", physMem));
 
@@ -166,6 +173,13 @@ namespace Terradue.Cloud {
                 return null;
 
             Regex regex = new Regex("^\\ *Cpu\\(s\\):\\ *(?<user>[0-9]*\\.?[0-9]*)%us,\\ *(?<system>[0-9]*\\.?[0-9]*)%sy,\\ *(?<ni>[0-9]*\\.?[0-9]*)%ni,\\ *(?<idle>[0-9]*\\.?[0-9]*)%id,\\ *(?<wait>[0-9]*\\.?[0-9]*)%wa,\\ *(?<hi>[0-9]*\\.?[0-9]*)%hi,\\ *(?<si>[0-9]*\\.?[0-9]*)%si,\\ *(?<st>[0-9]*\\.?[0-9]*)%st\\ *$",RegexOptions.Multiline);
+
+
+            foreach (Match match in regex.Matches(cpuUsage)) {
+                return match.Groups;
+            }
+
+            regex = new Regex("^%Cpu\\(s\\):\\ *(?<user>[0-9]*\\.?[0-9]*)\\ us,\\ *(?<system>[0-9]*\\.?[0-9]*)\\ sy,\\ *(?<ni>[0-9]*\\.?[0-9]*)\\ ni,\\ *(?<idle>[0-9]*\\.?[0-9]*)\\ id,\\ *(?<wait>[0-9]*\\.?[0-9]*)\\ wa,\\ *(?<hi>[0-9]*\\.?[0-9]*)\\ hi,\\ *(?<si>[0-9]*\\.?[0-9]*)\\ si,\\ *(?<st>[0-9]*\\.?[0-9]*)\\ st$", RegexOptions.Multiline);
 
 
             foreach (Match match in regex.Matches(cpuUsage)) {
