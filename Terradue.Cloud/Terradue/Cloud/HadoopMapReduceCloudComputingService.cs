@@ -12,8 +12,8 @@ namespace Terradue.Cloud
         private String aggregatedDebug = null ;
 
 		public HadoopMapReduceCloudComputingService () : base () {
-            hadoop_jobtracker = new ProcessCloudComputingService("hadoop-0.20-jobtracker", "Hadoop Job Tracker", true);
-            hadoop_tasktracker = new ProcessCloudComputingService("hadoop-0.20-tasktracker", "Hadoop Task Tracker", true);
+            hadoop_jobtracker = new ProcessCloudComputingService("hadoop-0.20-jobtracker", "Hadoop Job Tracker", true, true);
+            hadoop_tasktracker = new ProcessCloudComputingService("hadoop-0.20-tasktracker", "Hadoop Task Tracker", true, true);
 
             if (hadoop_jobtracker.Status == "Started" && hadoop_tasktracker.Status == "Started") {
                 aggregatedStatus = "Started";
