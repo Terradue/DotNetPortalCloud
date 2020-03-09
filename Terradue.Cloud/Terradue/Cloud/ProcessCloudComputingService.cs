@@ -5,17 +5,23 @@ namespace Terradue.Cloud
 {
 	public class ProcessCloudComputingService : CloudComputingService
 	{
+        private bool UsesSystemCtlCommand;
 
 		private String status = "Unknown";
 
         private String debug = null;
 
-		private void GetStatus (){
+		private void GetStatus(){
 			try {
 				System.Diagnostics.Process sc = new System.Diagnostics.Process();
 				sc.EnableRaisingEvents = false;
-				sc.StartInfo.FileName = "/sbin/service";
-				sc.StartInfo.Arguments = this.Id + " status";
+                if (UsesSystemCtlCommand) {
+                    sc.StartInfo.FileName = "/usr/bin/systemctl";
+                    sc.StartInfo.Arguments = "status " + this.Id;
+                } else {
+                    sc.StartInfo.FileName = "/sbin/service";
+                    sc.StartInfo.Arguments = this.Id + " status";
+                }
                 sc.StartInfo.RedirectStandardOutput = true;
                 sc.StartInfo.RedirectStandardError = true;
                 sc.StartInfo.UseShellExecute = false;
@@ -63,8 +69,13 @@ namespace Terradue.Cloud
             try {
                 System.Diagnostics.Process sc = new System.Diagnostics.Process();
                 sc.EnableRaisingEvents = false;
-                sc.StartInfo.FileName = "/sbin/service";
-                sc.StartInfo.Arguments = this.Name + " start";
+                if (UsesSystemCtlCommand) {
+                    sc.StartInfo.FileName = "/usr/bin/systemctl";
+                    sc.StartInfo.Arguments = "start " + this.Id;
+                } else {
+                    sc.StartInfo.FileName = "/sbin/service" + this.Id;
+                    sc.StartInfo.Arguments = this.Id + " start";
+                }
                 sc.StartInfo.UseShellExecute = true;
                 sc.Start();
                 sc.WaitForExit();
@@ -85,8 +96,13 @@ namespace Terradue.Cloud
             try {
                 System.Diagnostics.Process sc = new System.Diagnostics.Process();
                 sc.EnableRaisingEvents = false;
-                sc.StartInfo.FileName = "/sbin/service";
-                sc.StartInfo.Arguments = this.Name + " stop";
+                if (UsesSystemCtlCommand) {
+                    sc.StartInfo.FileName = "/usr/bin/systemctl";
+                    sc.StartInfo.Arguments = "stop " + this.Id;
+                } else {
+                    sc.StartInfo.FileName = "/sbin/service" + this.Id;
+                    sc.StartInfo.Arguments = this.Id + " stop";
+                }
                 sc.StartInfo.UseShellExecute = true;
                 sc.Start();
                 sc.WaitForExit();
@@ -126,6 +142,13 @@ namespace Terradue.Cloud
 				GetStatus ();
 		}
 
-	}
+        public ProcessCloudComputingService(string Id, string Name, bool direct, bool useSystemctl) : this(Id, Name) {
+
+            this.UsesSystemCtlCommand = useSystemctl;
+            if (direct)
+                GetStatus();
+        }
+
+    }
 }
 
